@@ -3,32 +3,24 @@ Velocity - Template Engine
 [![Build Status](https://secure.travis-ci.org/shepherdwind/velocity.js.png)](https://travis-ci.org/shepherdwind/velocity.js)
 [![NPM version](https://badge.fury.io/js/velocityjs.png)](http://badge.fury.io/js/velocityjs)
 
-*注意*
+velocityjs in npm the package name from the original velocity.js to velocityjs , feel require ("velocity.js") comparison does not look good, so renamed from the 0.3.0 version later in velocityjs next update.
 
-velocityjs在npm中包名从原来的`velocity.js`改为`velocityjs`，感觉`require("velocity.js")`
-比较不好看，所以改名，从`0.3.0`之后的版本都在`velocityjs`下更新。
+View the latest edition
 
-查看最新版本
-
-```bash
-$ npm info velocityjs version
-```
-
-velocity.js是velocity模板语法的javascript实现。
-[Velocity](http://velocity.apache.org/) 是基于Java的模板引擎，广泛应用在阿里集
-体各个子公司。Velocity模板适用于大量模板使用的场景，支持复杂的逻辑运算，包含
-基本数据类型、变量赋值和函数等功能。
+`$ npm info velocityjs Version`
+velocity.js is the velocity template syntax javascript implementation. Velocity is a Java-based template engine. Velocity template template applies to a large number of scenarios to support complex logic operations, including basic data types, variables, and functions assigned functions.
 
 
 ##Features
 
-- 支持客户端和服务器端使用
-- 语法是富逻辑的，构成门微型的语言
-- 语法分析和模板渲染分离
-- 基本完全支持velocity语法
-- 浏览器使用支持模板之间相互引用，依据js模块加载机制，比如kissy
-- 三个Helper，友好的数据模拟解决方案
-- [Vim Syntax](https://github.com/shepherdwind/vim-velocity)
+* Supports both client and server side use
+* The syntax is rich logic, language constitutes a tiny door
+* Separation of parsing and rendering templates
+* The basic syntax is fully supported velocity
+* The browser uses the mutual support between a reference template based js module loading mechanisms, such kissy
+* Three Helper, friendly data analog solutions
+* Vim Syntax
+
 
 ##Install
 
@@ -40,20 +32,12 @@ $ npm install velocityjs
 
 ##Broswer Support
 
-兼容ie6+，chrome等其他浏览器，[test case](http://shepherdwind.com/velocity/runner/tests.html)
-
-点击[此处](http://shepherdwind.com/velocity/try/index.html)可以体验web
-端velocity语法解析过程，注：使用ACE作为代码编辑器，仅支持高级浏览器访问。
-
-执行`cake`命令进行打包velocity.js浏览器端脚本:
+Execution cake orders packaged velocity.js browser side script:
 
 ```bash
 $ make parse
 ```
-
-需要cli下安装coffeejs，暂时打包是为kissy所使用的，velocity.js需要的一些常用的
-ecma5功能，比如`foreach, some, isArray`等，在node环境下是自带的功能，而web端的兼
-容是交给已有的类库解决。需要自行提供一组跨浏览器的api，比如kissy打包：
+Installation requires cli under coffeejs, temporary package is used for the kissy, velocity.js ecma5 need some common features, such as foreach, some, isArray , etc., in the node environment comes with features, and is cross-compatible web client to solve the existing library. Need to provide their own set of cross-browser api, such as kissy package:
 
 ```js
   //api map
@@ -70,26 +54,21 @@ ecma5功能，比如`foreach, some, isArray`等，在node环境下是自带的�
 
 ```
 
-Velocity语法具有很高的容错能力，类似于html结构的解析，同时语法规则复杂，所以语法
-解释器执行性能可能比较慢，`velocity.js`把语法结构分析运算和语法执行两个过程独立出来，
-第一步，语法结构分析返回一个数组(语法树)，描述velocity语法，语法执行使用数据和语
-法树，计算模板最终结果。
+Velocity syntax with high fault tolerance, similar to parse html structure, while the complex rules of grammar, syntax interpreter so execution performance may be slower, velocity.js perform the analysis algorithms and grammar grammatical structure independent of the two processes, the first step, grammatical structure analysis returns an array (syntax tree), describing velocity syntax, grammar and syntax tree performed using the data to calculate the final results of the template.
 
-执行build后，得到两个文件，分别是`build/velocity/`下的`index.js`和`parse.js`，两者
-相互独立，`parse.js`语法分析过程可以放在本地完成，执行命令：
+After executing build, get two documents, namely build / velocity / under index.js and parse.js , both independent of each other, parse.js parsing process can be placed locally, run the command:
 
-把语法分析和模板拼接分开，为了方便在本地编译语法树，减少在web端js运算。本地编译
-模板的思路，源自KISSY的[xtemplate](http://docs.kissyui.com/docs/html/api/component/xtemplate/)。
+The parsing and template stitching apart, in order to facilitate the local compiler syntax tree, reduce web side js operations. Thinking locally compiled template from KISSY of XTemplate .
 
-虽然语法解释器可以在浏览器端执行，但是，不推荐那么使用。
+Although the syntax interpreter can be executed in the browser, but it is not recommended to use.
 
 ```bash
-#使用velocity命令行工具打包
+# Using the velocity command line tools packaged
 veloctiy --build *.vm
 veloctiy -b *.vm
 ```
 
-源码中`test/web/`目录的js，一部分就是线下编译后的得到的，此处可[直接访问](http://shepherdwind.com/velocity/web/index.html)。
+Source in `test/Web/JS` directory compiled as part of the line is obtained here can be directly accessed .
 
 ##Public API
 
@@ -115,7 +94,7 @@ var asts = Parser.parse('string of velocity');
 
 ###On Broswer
 
-1 . 使用线下打包方案：
+1 . package under the program using the line:
 
 ```js
 KISSY.use('velocity/index, web/directives', function(S, Velocity, asts){
@@ -124,7 +103,7 @@ KISSY.use('velocity/index, web/directives', function(S, Velocity, asts){
 });
 ```
 
-2 . 使用线上编译：
+2 . use the online compilation:
 
 ```js
 KISSY.use('velocity/index, velocity/parse', function(S, Velocity, Parser){
