@@ -31,8 +31,9 @@ $ npm install velocityjs
 ```
 
 ##Broswer Support
+Compatible ie6 +, chrome and other browsers, test Case
 
-Execution cake orders packaged velocity.js browser side script:
+Execution `cake` orders packaged velocity.js browser side script:
 
 ```bash
 $ make parse
