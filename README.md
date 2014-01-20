@@ -89,8 +89,11 @@ var asts = Parser.parse('string of velocity');
 ```
 ####context
 
-`context`是一个对象，可以为空，执行中`$foo.bar`，访问路径是`context.foo.bar`，
-`context`的属性可以是函数，和vm中定义保持一致。
+context
+
+`context` is an object that can be empty, running `$foo.bar` , the access path is `context.foo.bar`,
+
+`context` attributes can be functions, and define vm consistent.
 
 ###On Broswer
 
@@ -114,30 +117,23 @@ KISSY.use('velocity/index, velocity/parse', function(S, Velocity, Parser){
 });
 ```
 
-两者的区别在于asts的获取，第一种方式，直接取asts，第二种，需要首先执行语法分析过
-程。
+The difference is that asts acquisition, the first approach, direct access asts, second, you need to first perform parsing process.
 
 ##Syntax
 
-具体语法请访问官网文档：[velocity user guide](http://velocity.apache.org/engine/devel/user-guide.html)。
+Concrete syntax, please visit the official website document: [velocity user guide](http://velocity.apache.org/engine/devel/user-guide.html)。
 
 ###Directives
 
-Directives支持`set`, `foreach`, `if|else|elseif`, `macro`, `parse`, `break`。不
-支持有，`stop`, `evaluate`, `define`，感觉这些语法比较偏，用处不大，暂时没有实现。
-其中`parse`，在web端，使用kissy的模块加载器加载，需要首先线下编译打包，[例子](http://shepherdwind.com/velocity/web/index.html)。
+Directives support `set`, `foreach`, `if|else|elseif`, `macro`, `parse`, `break`。The following directives are not supported，`stop`, `evaluate`, `define`，feeling the syntax more biased, less useful, there is no implementation. Which `parse`， the web side, use kissy module loader loads, you need to compile the line package, examples .
 
 ###macro
 
-宏分为系统的宏，比如`parse, include`，和用户自定义宏，通过`#macro`在vm中定义，此
-外可以使用自定义的js函数替代在vm中定义。对于系统宏和自定义宏，不做区分，对于
-`#parse`和`#include`的调用，可以使用自定义函数来执行。具体见[issue #3](https://github.com/shepherdwind/velocity.js/issues/3)。
+Acer Acer into the system, such as `parse`, `include` , and user-defined macros by `# macro` is defined in vm, in addition you can use a custom js function instead defined in the vm. For system macros and custom macros, no distinction, for the # `parse` and # `include` calls, you can use a custom function to perform. See specific.[issue #3](https://github.com/shepherdwind/velocity.js/issues/3)。
 
 ###foreach
 
-foreach在velocity中对对象的遍历，和js有区别，java中对象是一个map，需要通过方法
-`keyset`来获取map中的key，foreach循环写法等同于js的for in循环，感觉有点怪异。在
-一个foreach，有一个`$foreach`的对象可以使用，此变量作用域为当前循环范围。
+foreach in the velocity of the object traversal, and js differentiated, java objects in a map, through methods `keyset` to get the map of the key, foreach loop wording identical to the js for in the cycle, I feel a little weird. In a foreach, there is a `$ foreach` object can be used, this variable is scoped to the current cycle range.
 
 ```
 #foreach($num in [1..5])
@@ -159,15 +155,9 @@ end
 
 ###string
 
-velocity中字符串求值和php类似，双引号字符串里面的变量会被替换变量对应的值，单引
-号原样返回，推荐尽量使用单引号，那样性能好一些。此外，双引号中变量替换，没有再次
-调用语法分析器，而是使用正则，只支持简单的引用替换，比如`"$varname1 $foo.bar"`，
-`"$foo.bar[1] $foo.bar()"`都不支持。如果需要完整支持字符串双引号，需要反复调用语
-法分析器，考虑到性能，基本引用基本够用了，vm本身支持强大的变量赋值，可以先赋值，
-在放入字符串，或者使用加法进行字符串拼接。
+velocity evaluated and php string similar variables inside double-quoted string value of the variable will be replaced with the corresponding single quotes as it returns, it is recommended to make use of single quotation marks, as good as some of the properties. In addition, variable substitution in double quotes, the parser does not call again, but the use of regular, replace only support simple references, such as `"$ varname1 $ foo.bar"` , `"$ foo.bar [1] $ foo.bar ( ) "` is not supported. If you need the full support of the string in double quotes, you need to repeatedly call the parser, taking into account the performance of the basic references basic enough, vm itself supports powerful variable assignment, you can first assignment in put string, or use the addition for character string stitching.
 
-在java中可能大量使用双引号方式，因为java对象无法自动转换类型，双引号做类型转换用，
-而在web端，js无此需要。
+In a lot of java may use double quotes way because not automatically convert java object type, use double quotes do type conversion, and in the web client, js no such need.
 
 ###velocity
 
@@ -194,13 +184,13 @@ Example:
 
 ##Helper
 
-Helper提供一些额外的功能，主要用于解决vm数据模拟问题。
+Helper provides some additional features, mainly used to solve the problem vm simulation data.
 
-- `structure` 获取vm中所有变量的结构: `$foo.bar` => `foo: {bar: 'string'}`
-- `backstep` vm逆推，根据velocity文件和解析后的结果，计算数据结构和内容
-- `jsonify` 把vm转换为json结构，去除其中的html标签，比如：
+- `structure` to get all the variables vm structures: `$ foo.bar` => `foo: {Bar: 'String'}`
+- `backstep` VM backstepping, according to the results of velocity documents and parsed to calculate the data structure and content
+- `jsonify` the vm converted to json structure, removing one of the html tag, for example:
 
-jsonify文档[issue #11](https://github.com/shepherdwind/velocity.js/issues/11)
+jsonify document [issue #11](https://github.com/shepherdwind/velocity.js/issues/11)
 
 ```
 hello world $foo.name.
